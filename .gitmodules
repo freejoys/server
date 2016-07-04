@@ -1,0 +1,3 @@
+[submodule "deps/skynet"]
+	path = deps/skynet
+	url = https://github.com/freejoys/skynet.git
