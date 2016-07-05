@@ -23,3 +23,4 @@ macosx: PLAT = macosx
 
 linux macosx:
 	make all PLAT=$@
+
