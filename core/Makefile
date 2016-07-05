@@ -1,26 +1,31 @@
 include platform.mk
 
-
 MAKE=make
-SKYNET_DIR=3rd/skynet
+SKYNET_DIR=skynet
 OUT_DIR=out
 SKYNET_OUT_DIR=bin
 GAMELIB_OUT_DIR=lib
 OUT_FILE=$(PLAT).zip
 
-update3rd:
-	git submodule update --init
+.PHONY: skynet src 3rd 
 
-skynet: update3rd
-	cd 3rd/skynet && $(MAKE) linux
+lib_dir:
+	mkdir -p $(OUT_DIR)/$(GAMELIB_OUT_DIR)/luaclib
+	mkdir -p $(OUT_DIR)/$(GAMELIB_OUT_DIR)/cservice
 
-all: skynet
-	rm -fr $(OUT_DIR)
+bin: 
+	cd $(SKYNET_DIR) && $(MAKE) $(PLAT)
 	mkdir -p $(OUT_DIR)/$(SKYNET_OUT_DIR)
-	mkdir -p $(OUT_DIR)/$(GAMELIB_OUT_DIR)
 	cp $(SKYNET_DIR)/skynet $(SKYNET_DIR)/cservice $(SKYNET_DIR)/service $(SKYNET_DIR)/lualib $(SKYNET_DIR)/luaclib $(OUT_DIR)/$(SKYNET_OUT_DIR) -r
+	
+src: lib_dir
+	cd src && $(MAKE) OUT_DIR=../$(OUT_DIR)/$(GAMELIB_OUT_DIR)
+
+3rd: lib_dir
+	cd 3rd && $(MAKE) all OUT_DIR=../$(OUT_DIR)/$(GAMELIB_OUT_DIR)
+
+all: bin src 3rd
 	cd $(OUT_DIR) && zip $(OUT_FILE) $(SKYNET_OUT_DIR) $(GAMELIB_OUT_DIR) -r
 
 clean:
-	cd $(SKYNET_DIR) && make clean
 	rm -fr $(OUT_DIR)
