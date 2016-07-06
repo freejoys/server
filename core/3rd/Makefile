@@ -30,6 +30,7 @@ $(LUA_CLIB_PATH)/protobuf.so : pbc/binding/lua53/pbc-lua53.c $(PBC_STATICLIB)
 $(LUA_CLIB_PATH)/cjson.so : lua-cjson/lua_cjson.c lua-cjson/strbuf.c lua-cjson/fpconv.c
 	$(CC) $(CFLAGS) $(SHARED) -I$lua-cjson $^ -o $@ 
 
-$(LUA_CLIB_PATH)/lfs.so :
-	cd luafilesystem && $(MAKE) CC=$(CC)
-	cp luafilesystem/src/lfs.so ./$(LUA_CLIB_PATH)
+$(LUA_CLIB_PATH)/lfs.so : luafilesystem/src/lfs.c
+	$(CC) $(CFLAGS) $(SHARED) $^ -o $@
+#	cd luafilesystem && $(MAKE) CC=$(CC)
+#	cp luafilesystem/src/lfs.so ./$(LUA_CLIB_PATH)
