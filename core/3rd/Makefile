@@ -15,7 +15,7 @@ PBC_STATICLIB := pbc/build/libpbc.a
 PBC_INC := pbc
 
 $(PBC_STATICLIB) :
-	cd pbc && $(MAKE) CC=$(CC)
+	cd pbc && $(MAKE) CC=$(CC) lib
 
 all : \
   $(foreach v, $(LUA_CLIB), $(LUA_CLIB_PATH)/$(v).so) 
