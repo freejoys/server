@@ -24,10 +24,10 @@ $(LUA_CLIB_PATH) :
 	mkdir $(LUA_CLIB_PATH)
 
 # 3rd
-$(LUA_CLIB_PATH)/protobuf.so : pbc/binding/lua53/pbc-lua53.c $(PBC_STATICLIB) | $(LUA_CLIB_PATH)
+$(LUA_CLIB_PATH)/protobuf.so : pbc/binding/lua53/pbc-lua53.c $(PBC_STATICLIB)
 	$(CC) $(CFLAGS) $(SHARED) -I$(PBC_INC) $^ -o $@
 
-$(LUA_CLIB_PATH)/cjson.so : lua-cjson/lua_cjson.c lua-cjson/strbuf.c lua-cjson/fpconv.c | $(LUA_CLIB_PATH)
+$(LUA_CLIB_PATH)/cjson.so : lua-cjson/lua_cjson.c lua-cjson/strbuf.c lua-cjson/fpconv.c
 	$(CC) $(CFLAGS) $(SHARED) -I$lua-cjson $^ -o $@ 
 
 $(LUA_CLIB_PATH)/lfs.so :

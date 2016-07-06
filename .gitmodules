@@ -1,3 +1,6 @@
-[submodule "core/3rd/skynet"]
-	path = core/3rd/skynet
+[submodule "core/3rd/pbc"]
+	path = core/3rd/pbc
+	url = https://github.com/freejoys/pbc.git
+[submodule "core/skynet"]
+	path = core/skynet
 	url = https://github.com/freejoys/skynet.git
